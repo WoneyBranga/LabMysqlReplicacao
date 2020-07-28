@@ -1,0 +1,27 @@
+[mysqld]
+
+server-id=2
+
+log-bin=mysql-bin
+log-slave-updates=1
+
+datadir=/var/lib/mysql
+read-only=1
+
+# Caso master-master...
+# auto_increment_increment=2
+# auto_increment_offset=2
+
+# Parametro necessario para compatibilidade da replicacao mysql5.5.60 > maria10.3.22
+slave_sql_verify_checksum=0
+binlog_checksum=0
+
+# Caso queiramos ignorar alguns erros, assim não interrompendo replicação,
+# podemos incluí-los na variavel abaixo
+#slave-skip-errors = 1062
+
+innodb_flush_log_at_trx_commit = 2
+innodb_flush_method = O_DIRECT
+
+skip-host-cache
+skip-name-resolve
